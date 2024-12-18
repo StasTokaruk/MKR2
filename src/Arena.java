@@ -15,4 +15,10 @@ public class Arena implements Mediator {
         System.out.println("Атака на арені:");
         attacker.attack(target);
     }
+
+    @Override
+    public void move(Character mover, int x, int y) {
+        System.out.println("Переміщення на арені " + mover.getName() + " на координати " + x + " " + y);
+        mover.setPosition(x, y);
+    }
 }

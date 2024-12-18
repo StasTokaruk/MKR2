@@ -4,8 +4,14 @@ public class Archer implements Character {
     private int attackPower = 30;
     private int[] position = new int[2];
 
-    public Archer(String name) {
+    public Archer(String name, int x, int y) {
         this.name = name;
+        this.position[0] = x;
+        this.position[1] = y;
+    }
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override
@@ -25,9 +31,19 @@ public class Archer implements Character {
         position[0] = x;
         position[1] = y;
     }
+    @Override
+    public void displayPosition() {
+        System.out.println("Координати: " + position[0] + ", " + position[1]);
+    }
 
     @Override
     public void attack(Character target) {
         System.out.println(name + " стріляє у " + target.getName() + " на " + attackPower + " одиниць!");
+        target.setHealth(getHealth()-attackPower);
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Ім'я " + name + " Здоров'я " + health + " Сила атаки " + attackPower);
     }
 }

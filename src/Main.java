@@ -1,15 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        // Створення медіатора (Арена)
+        // Створення Арени
         Arena arena = new Arena();
 
         // Спостерігач
         Observer observer = new CharacterObserver();
 
         // Створення персонажів через фабрику
-        Character warrior = CharacterFactory.createCharacter("warrior", "Борис");
-        Character mage = CharacterFactory.createCharacter("mage", "Зіновій");
-        Character archer = CharacterFactory.createCharacter("archer", "Лука");
+        Character warrior = CharacterFactory.createCharacter("warrior", "Борис", 0, 0);
+        Character mage = CharacterFactory.createCharacter("mage", "Зіновій", 10, 10);
+        Character archer = CharacterFactory.createCharacter("archer", "Робін", 20 , 20);
 
         // Реєстрація персонажів на арені
         arena.registerCharacter(warrior);
@@ -21,8 +21,22 @@ public class Main {
         arena.registerCharacter(archer);
         observer.update(archer);
 
+        warrior.displayInfo();
+        mage.displayInfo();
+        archer.displayInfo();
+
         // Координація атак
         arena.coordinateAttack(warrior, mage);
         arena.coordinateAttack(archer, warrior);
+        arena.coordinateAttack(mage, archer);
+
+        //Переміщення персонажа
+        warrior.displayPosition();
+        arena.move(warrior,30,30);
+        warrior.displayPosition();
+
+        warrior.displayInfo();
+        mage.displayInfo();
+        archer.displayInfo();
     }
 }
