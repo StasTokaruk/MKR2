@@ -1,29 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Arena {
+public class Arena implements Mediator {
     private List<Character> characters = new ArrayList<>();
-    private List<Observer> observers = new ArrayList<>();
 
-    public void addCharacter(Character character) {
+    @Override
+    public void registerCharacter(Character character) {
         characters.add(character);
-        notifyObservers(character);
+        System.out.println(character.getName() + " приєднався до арени.");
     }
 
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    private void notifyObservers(Character character) {
-        for (Observer observer : observers) {
-            observer.update(character);
-        }
-    }
-
-    public void displayAllCharacters() {
-        System.out.println("Персонажі на арені:");
-        for (Character character : characters) {
-            character.displayInfo();
-        }
+    @Override
+    public void coordinateAttack(Character attacker, Character target) {
+        System.out.println("Атака на арені:");
+        attacker.attack(target);
     }
 }

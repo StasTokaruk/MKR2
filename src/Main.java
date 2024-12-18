@@ -1,25 +1,28 @@
 public class Main {
     public static void main(String[] args) {
+        // Створення медіатора (Арена)
         Arena arena = new Arena();
 
-        // Створення спостерігачів
-        Player player1 = new Player("Гравець 1");
-        Player player2 = new Player("Гравець 2");
-
-        arena.addObserver(player1);
-        arena.addObserver(player2);
+        // Спостерігач
+        Observer observer = new CharacterObserver();
 
         // Створення персонажів через фабрику
-        Character warrior = CharacterFactory.createCharacter("воїн", "Артур", 10, 20);
-        Character mage = CharacterFactory.createCharacter("маг", "Мерлін", 15, 25);
-        Character archer = CharacterFactory.createCharacter("лучник", "Робін", 30, 40);
+        Character warrior = CharacterFactory.createCharacter("warrior", "Борис");
+        Character mage = CharacterFactory.createCharacter("mage", "Зіновій");
+        Character archer = CharacterFactory.createCharacter("archer", "Лука");
 
-        // Додавання персонажів на арену
-        arena.addCharacter(warrior);
-        arena.addCharacter(mage);
-        arena.addCharacter(archer);
+        // Реєстрація персонажів на арені
+        arena.registerCharacter(warrior);
+        observer.update(warrior);
 
-        // Виведення всіх персонажів
-        arena.displayAllCharacters();
+        arena.registerCharacter(mage);
+        observer.update(mage);
+
+        arena.registerCharacter(archer);
+        observer.update(archer);
+
+        // Координація атак
+        arena.coordinateAttack(warrior, mage);
+        arena.coordinateAttack(archer, warrior);
     }
 }
